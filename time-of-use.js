@@ -16,7 +16,7 @@ class ContentCardExample extends HTMLElement {
     this.content.innerHTML = `
       The state of ${entityId} is ${stateStr}!
       <br><br>
-      <img src="http://via.placeholder.com/350x150">
+      <img src="https://cdn.shopify.com/s/files/1/1465/8230/files/whitney-mnt_large.jpg?v=1475605534">
     `;
   }
 
