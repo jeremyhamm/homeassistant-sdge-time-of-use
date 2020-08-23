@@ -12,16 +12,14 @@ class ContentCardExample extends HTMLElement {
     const entityId = this.config.entity;
     const state = hass.states[entityId];
     const stateStr = state ? state.state : 'unavailable';
+    const date = getDatetime();
 
     this.content.innerHTML = `
-      The state of ${entityId} is ${stateStr}!
+      Today is ${date} 
     `;
   }
 
   setConfig(config) {
-    if (!config.entity) {
-      throw new Error('You need to define an entity');
-    }
     this.config = config;
   }
 
@@ -33,7 +31,7 @@ class ContentCardExample extends HTMLElement {
 
   getDatetime() {
     const now = Date();
-
+    return now;
   }
 }
 
