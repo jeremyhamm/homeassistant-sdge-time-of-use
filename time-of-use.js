@@ -15,8 +15,6 @@ class ContentCardExample extends HTMLElement {
 
     this.content.innerHTML = `
       The state of ${entityId} is ${stateStr}!
-      <br><br>
-      <img src="https://cdn.shopify.com/s/files/1/1465/8230/files/whitney-mnt_large.jpg?v=1475605534">
     `;
   }
 
@@ -31,6 +29,11 @@ class ContentCardExample extends HTMLElement {
   // distribute all cards over the available columns.
   getCardSize() {
     return 3;
+  }
+
+  getDatetime() {
+    const now = Date();
+
   }
 }
 
