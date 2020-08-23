@@ -2,7 +2,7 @@ class ContentCardExample extends HTMLElement {
   set hass(hass) {
     if (!this.content) {
       const card = document.createElement('ha-card');
-      card.header = 'Example card';
+      card.header = 'SDGE Current Tier';
       this.content = document.createElement('div');
       this.content.style.padding = '0 16px 16px';
       card.appendChild(this.content);
@@ -34,4 +34,4 @@ class ContentCardExample extends HTMLElement {
   }
 }
 
-customElements.define('content-card-example', ContentCardExample);
+customElements.define('time-of-use', ContentCardExample);
