@@ -15,11 +15,14 @@ class ContentCardExample extends HTMLElement {
     const date = getDatetime();
 
     this.content.innerHTML = `
-      Today is ${date} 
+      Today is ${date}
     `;
   }
 
   setConfig(config) {
+    if (!config.entity) {
+      throw new Error('You need to define an entity');
+    }
     this.config = config;
   }
 
