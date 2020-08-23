@@ -12,10 +12,10 @@ class ContentCardExample extends HTMLElement {
     const entityId = this.config.entity;
     const state = hass.states[entityId];
     const stateStr = state ? state.state : 'unavailable';
-    const date = getDatetime();
+    //const date = getDatetime();
 
     this.content.innerHTML = `
-      Today is ${date}
+      TEST
     `;
   }
 
@@ -32,10 +32,10 @@ class ContentCardExample extends HTMLElement {
     return 3;
   }
 
-  getDatetime() {
-    const now = Date();
-    return now;
-  }
+  // getDatetime() {
+  //   const now = Date();
+  //   return now;
+  // }
 }
 
 customElements.define('time-of-use', ContentCardExample);
