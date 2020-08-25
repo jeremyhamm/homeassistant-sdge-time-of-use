@@ -21,17 +21,47 @@ const getDayofWeek = (dow) => {
       return 'Friday';
     case 6:
       return 'Saturday';
+    }
+}
+
+/**
+ * Get current date (mm/dd/yyyy)
+ * 
+ * @return {String}
+*/
+const getCurrentDate = (date) => {
+  return `${getDayofWeek(date.getDay())} ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+}
+
+/**
+ * SDGE Tiers by day and hour of day
+*/
+const tiers = {
+  'weekday': {
+    'super-off-peak': [0,1,2,3,4,5],
+    'off-peak': [6,7,8,9,10,11,12,13,14,15,21,22,23],
+    'on-peak': [16,17,18,19,20]
+  },
+  'weekend': {
+    'super-off-peak': [0,1,2,3,4,5,6,7,8,9,10,11,12,13],
+    'off-peak': [14,15,21,22,23],
+    'on-peak': [16,17,18,19,20]
   }
 }
 
 /**
-* Get current date (mm/dd/yyyy)
-* 
-* @return {String}
+ * Calculate current SDGE time of use
+ * 
+ * @param {Number} - current time
+ * 
+ * @return {String} - SDGE time of use
 */
-const getCurrentDate = () => {
-  const now = new Date();
-  return `${getDayofWeek(now.getDay())} ${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()}`
+const calculateTimeofUse = (time, day) => {
+  if ( day === 0 || day === 6 ) {
+        
+  } else {
+    tiers.weekday
+  }
 }
 
 class ContentCardExample extends HTMLElement {
@@ -48,11 +78,16 @@ class ContentCardExample extends HTMLElement {
     const entityId = this.config.entity;
     const state = hass.states[entityId];
     const stateStr = state ? state.state : 'unavailable';
+    
+    // Time of use
+    const now = new Date();
+    const currentDate = getCurrentDate(now);
+    const timeOfUse = calculateTimeofUse(now.toTimeString(), now.getDay());
 
     this.content.innerHTML = `
-      Today is ${getCurrentDate()}
-      <br><br>
-      <img src="https://cdn.shopify.com/s/files/1/1465/8230/files/whitney-mnt_large.jpg?v=1475605534">
+      Today is ${currentDate}
+      <br>
+      The current <b>Time of Use</b> is: ${timeOfUse}
     `;
   }
 
