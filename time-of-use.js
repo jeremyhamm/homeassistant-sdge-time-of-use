@@ -58,9 +58,17 @@ const tiers = {
 */
 const calculateTimeofUse = (time, day) => {
   if ( day === 0 || day === 6 ) {
-        
+    for (const tier in tiers.weekend) {
+      if ( tiers.weekend[tier].includes(time) ) {
+        return tier;
+      }
+    }   
   } else {
-    tiers.weekday
+    for (const tier in tiers.weekday) {
+      if ( tiers.weekday[tier].includes(time) ) {
+        return tier;
+      }
+    }
   }
 }
 
@@ -69,26 +77,33 @@ class ContentCardExample extends HTMLElement {
     if (!this.content) {
       const card = document.createElement('ha-card');
       card.header = 'SDGE Time of Use';
+      card.style.color = '#FFFFFF';
       this.content = document.createElement('div');
       this.content.style.padding = '0 16px 16px';
       card.appendChild(this.content);
       this.appendChild(card);
+      
+      // Time of use
+      const now = new Date();
+      const currentDate = getCurrentDate(now);
+      const timeOfUse = calculateTimeofUse(now.getHours(), now.getDay());
+        
+      if ( timeOfUse === 'super-off-peak' ) {
+        card.style.background = '#b1bf4a';
+      } else if ( timeOfUse === 'off-peak' ) {
+        card.style.background = '#40ae49';
+      } else {
+        card.style.background = '#f68d1e';
+      }
+      
+      this.content.innerHTML = `
+        <div>
+          ${currentDate}
+          <br>
+          <h1 style="text-transform: uppercase; text-align: center;">${timeOfUse}</h1>
+        </div>
+      `;
     }
-
-    const entityId = this.config.entity;
-    const state = hass.states[entityId];
-    const stateStr = state ? state.state : 'unavailable';
-    
-    // Time of use
-    const now = new Date();
-    const currentDate = getCurrentDate(now);
-    const timeOfUse = calculateTimeofUse(now.toTimeString(), now.getDay());
-
-    this.content.innerHTML = `
-      Today is ${currentDate}
-      <br>
-      The current <b>Time of Use</b> is: ${timeOfUse}
-    `;
   }
 
   setConfig(config) {
