@@ -78,6 +78,7 @@ class ContentCardExample extends HTMLElement {
       const card = document.createElement('ha-card');
       card.style.color = '#FFFFFF';
       card.header = 'SDGE Time of Use';
+      card.style.color = '#FFFFFF';
       this.content = document.createElement('div');
       this.content.style.padding = '0 16px 16px';
       card.appendChild(this.content);
