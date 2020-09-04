@@ -1,1 +1,1 @@
-# homeassistant_custom_card
+# San Diego Gas & Electric (SDGE) Time of Use Custom Card
